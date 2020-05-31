@@ -43,7 +43,7 @@ In terraform/webapp/variables.tf:
 - bastion_ssh_from
 - slack_webhook_url
 - slack_channel
-_ slack_username
+- slack_username
 
 In terraform/ami-build/variables.tf:
 - key_name
