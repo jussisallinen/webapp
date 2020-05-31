@@ -1,0 +1,9 @@
+---
+- name: Deploy webapp infrastructure
+  hosts: localhost
+  gather_facts: no
+  vars:
+    project_dir: ../terraform/ami-build/
+  roles:
+   - ami-build
+   - aws-deploy

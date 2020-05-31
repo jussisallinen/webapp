@@ -1,0 +1,5 @@
+- name: provision vpc
+  terraform:
+    project_path: ../terraform/webapp/
+    state: present
+    force_init: true

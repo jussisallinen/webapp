@@ -1,0 +1,30 @@
+---
+- hosts: default
+  remote_user: ubuntu
+  become: yes
+  vars:
+    nginx_port: 8080
+
+  tasks:
+  - name: Update apt database
+    apt:
+      update_cache: yes
+
+  - name: Upgrade all packages to the latest version
+    apt:
+      name: "*"
+      state: latest
+
+  - name: Install Nginx
+    apt:
+      name: nginx
+      state: present
+
+  - name: Copy Nginx configuration
+    template: src=default.j2 dest=/etc/nginx/sites-available/default backup=yes owner=root group=root mode=0644
+
+  - name: Verify Nginx is started and enabled
+    service:
+      name: nginx
+      state: started
+      enabled: yes

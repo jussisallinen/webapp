@@ -1,0 +1,21 @@
+- name: provision build vpc
+  terraform:
+    project_path: '{{ project_dir }}'
+    state: present
+    force_init: true
+  register: terraform
+
+- debug:
+   var: terraform.outputs.subnet_id.value
+
+- name: build packer template webapp
+  shell: packer build -var 'subnet_id={{ terraform.outputs.subnet_id.value }}' ../packer/webapp.json
+  register: packer
+
+- debug:
+   var: packer.stdout_lines
+
+- name: deprovision build vpc
+  terraform:
+    project_path: '{{ project_dir }}'
+    state: absent
