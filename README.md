@@ -4,10 +4,11 @@ HA Webservice on AWS
 ![image](https://webapp.route53.jus.si/webapp-vpc-diagram.png)
 
 ## Overview
-Automated image build and Nginx based web-environment deployment with Ansible and Terraform.
+Automated image build and Nginx based web-environment deployment with Ansible, Packer and Terraform.
 
 Technical details:
-- Custom AMI builds with temporary Build VPC which is terminated at the end of AMI build.
+- Single Ansible Playbook to build and deploy the environment.
+- Packer builds custom AMI with temporary Build VPC which is terminated at the end of the build process.
 - Dedicated Production VPC with Public and Private subnets spanning 3 Availability Zones.
 - ALB handles SSL termination with ACM generated certificate validated through Route53 DNS.
 - ALB redirecting traffic from 80 (HTTP) to 443 (HTTPS).
@@ -16,7 +17,7 @@ Technical details:
 - Auto Scaling Group events are subscribed to SNS topic and sent to a Slack channel with Lambda function using the Slack incoming webhooks API.
 
 ## Usage
-Set following environment variables prior to running ```ansible-playbook deploy.yml```:
+Ansible, Packer and Terraform are required and following environment variables need to be set prior to running ```ansible-playbook deploy.yml```:
 ```
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
