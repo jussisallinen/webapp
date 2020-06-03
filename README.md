@@ -68,7 +68,6 @@ In ```terraform/ami-build/variables.tf```:
 │   │           └── main.yml
 │   └── webapp.yml
 ├── packer
-│   ├── bastion.json
 │   └── webapp.json
 └── terraform
     ├── ami-build
