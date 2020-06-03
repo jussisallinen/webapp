@@ -55,15 +55,7 @@ resource "aws_security_group" "webapp-alb-sg" {
   # Inbound HTTP access from anywhere
   ingress {
     from_port   = 80
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Inbound HTTPS access from anywhere
-  ingress {
-    from_port   = 443
-    to_port     = 8080
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -82,7 +74,7 @@ resource "aws_security_group" "webapp-backend-sg" {
   description = "Allow webapp backend traffic"
   vpc_id      = module.vpc.vpc_id
 
-  # SSH access from anywhere
+  # SSH access from bastion
   ingress {
     from_port   = 22
     to_port     = 22
@@ -90,22 +82,15 @@ resource "aws_security_group" "webapp-backend-sg" {
     cidr_blocks = flatten([module.vpc.public_subnets_cidr_blocks])
   }
 
-  # HTTP access from the VPC
-  ingress {
-    from_port   = 80
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"]
-  }
-
+  # HTTPS access from ALB
   ingress {
     from_port   = 443
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"]
+    cidr_blocks = flatten([module.vpc.public_subnets_cidr_blocks])
   }
 
-  # outbound internet access
+  # Outbound Internet access
   egress {
     from_port   = 0
     to_port     = 0
