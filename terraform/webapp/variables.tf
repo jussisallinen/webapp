@@ -10,12 +10,12 @@ variable "public_key_path" {
 
 variable "route53_zone" {
   description = "Zone delegated to Route53 for DNS automation"
-  default = "route53.jus.si"
+  default = "aws.jus.si"
 }
 
 variable "cert_fqdn" {
   description = "FQDN for ACM certificate."
-  default = "webapp.route53.jus.si"
+  default = "webapp.aws.jus.si"
 }
 
 variable "region" {
