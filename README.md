@@ -14,7 +14,9 @@ Technical details:
 - ALB redirecting traffic from 80 (HTTP) to 443 (HTTPS).
 - Bastion and backend instances using AWS Auto Scaling Groups.
 - Auto Scaling Group distributes instances to 3 Availability Zones in eu-central-1 (Frankfurt) by default.
-- Auto Scaling Group events are subscribed to SNS topic and sent to a Slack channel with Lambda function using the Slack incoming webhooks API.
+- Auto Scaling Group events are subscribed to SNS topic and sent to a Slack channel with Lambda function using the Slack incoming webhooks API:
+
+![image](img/aws-cloudwatch-slack-notifications.png)
 
 ## Usage
 Ansible, Packer and Terraform are required and following environment variables need to be set prior to running ```ansible-playbook deploy.yml```:
