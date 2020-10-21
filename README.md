@@ -1,7 +1,7 @@
 # webapp
 HA Webservice on AWS
 
-![image](https://webapp.route53.jus.si/webapp-vpc-diagram.png)
+![image](img/webapp-vpc-diagram.png)
 
 ## Overview
 Automated image build and Nginx based web-environment deployment with Ansible, Packer and Terraform.
